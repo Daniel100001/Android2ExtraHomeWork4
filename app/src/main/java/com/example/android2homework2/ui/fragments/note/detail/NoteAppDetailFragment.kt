@@ -38,6 +38,7 @@ class NoteAppDetailFragment : Fragment() {
 
     private fun setUpListener() = with(binding) {
         textBack.setOnClickListener {
+
             val title = editTextFragmentDetail.text.toString()
             val description = editTextDescriptionFragmentDetail.text.toString()
 
@@ -46,8 +47,8 @@ class NoteAppDetailFragment : Fragment() {
             )
             findNavController().navigateUp()
         }
-        binding.day.text = dataNow
-        binding.time.text = todayData
+        binding.day.text = todayData
+        binding.time.text = timeNow
 
         binding.arrowLeft.setOnClickListener{
             findNavController().navigateUp()

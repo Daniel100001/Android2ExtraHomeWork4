@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.android2homework2.App
+import com.example.android2homework2.R
 import com.example.android2homework2.databinding.FragmentNoteAppDetailBinding
 import com.example.android2homework2.models.NoteModel
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class NoteAppDetailFragment : Fragment() {
@@ -34,6 +36,27 @@ class NoteAppDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpListener()
+        checkRadioButton()
+    }
+
+    private fun checkRadioButton() {
+        binding.buttonBlack.setOnClickListener {
+            binding.radioButton1.isChecked = true
+            binding.radioButton2.isChecked = false
+            binding.radioButton3.isChecked = false
+        }
+
+        binding.buttonWhite.setOnClickListener {
+            binding.radioButton1.isChecked = false
+            binding.radioButton2.isChecked = true
+            binding.radioButton3.isChecked = false
+        }
+
+        binding.button.setOnClickListener {
+            binding.radioButton1.isChecked = false
+            binding.radioButton2.isChecked = false
+            binding.radioButton3.isChecked = true
+        }
     }
 
     private fun setUpListener() = with(binding) {
@@ -47,6 +70,7 @@ class NoteAppDetailFragment : Fragment() {
             )
             findNavController().navigateUp()
         }
+
         binding.day.text = todayData
         binding.time.text = timeNow
 
@@ -54,5 +78,6 @@ class NoteAppDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
     }
+
 
 }

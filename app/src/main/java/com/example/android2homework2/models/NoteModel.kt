@@ -10,7 +10,8 @@ data class NoteModel(
     val title: String,
     val description: String,
     val time: String,
-    val data: String
+    val data: String,
+
 ) : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id:Int = 0

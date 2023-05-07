@@ -11,7 +11,7 @@ data class NoteModel(
     val description: String,
     val time: String,
     val data: String,
-
+    val color: Int
 ) : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id:Int = 0

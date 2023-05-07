@@ -1,5 +1,7 @@
 package com.example.android2homework2.ui.fragments.note.detail
 
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,6 +39,7 @@ class NoteAppDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpListener()
         checkRadioButton()
+        danchik()
     }
 
     private fun checkRadioButton() {
@@ -58,15 +61,31 @@ class NoteAppDetailFragment : Fragment() {
             binding.radioButton3.isChecked = true
         }
     }
+    private fun danchik() {
+        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            val color = when (checkedId) {
+                R.id.radioButton1 -> Color.parseColor("#FFC107") // yellow
+                R.id.radioButton2 -> Color.parseColor("#4CAF50") // green
+                R.id.radioButton3 -> Color.parseColor("#2196F3") // blue
+                else -> Color.TRANSPARENT // no color
+            }
+            // сохраняем выбранный цвет в SharedPreferences
+            val editor = requireActivity().getSharedPreferences("NoteColor", Context.MODE_PRIVATE).edit()
+            editor.putInt("color", color)
+            editor.apply()
+        }
+    }
 
     private fun setUpListener() = with(binding) {
         textBack.setOnClickListener {
 
             val title = editTextFragmentDetail.text.toString()
             val description = editTextDescriptionFragmentDetail.text.toString()
+            val sharedPreferences = requireActivity().getSharedPreferences("NoteColor", Context.MODE_PRIVATE)
+            val color = sharedPreferences.getInt("color", Color.TRANSPARENT)
 
             App.getInstate()?.noteDao()?.insert(
-                NoteModel(title, description, timeNow, dataNow)
+                NoteModel(title, description, timeNow, dataNow,color)
             )
             findNavController().navigateUp()
         }

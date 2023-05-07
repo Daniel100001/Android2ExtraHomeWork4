@@ -24,6 +24,8 @@ class NoteAppAdapter : RecyclerView.Adapter<NoteAppAdapter.NoteAppViewHolder>() 
             binding.titleItem.text = noteModel.title
             binding.time.text = noteModel.time
             binding.data.text = noteModel.data
+            binding.card.setCardBackgroundColor(noteModel.color)
+
         }
     }
 
